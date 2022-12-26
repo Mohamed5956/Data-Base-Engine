@@ -15,7 +15,9 @@ feilds=($(sed -n '1p' $name))
 echo ${feilds[@]}
 echo ${arr_type[@]}
 echo ${IDArray[@]}
-for ((i=0; i<3; i++))
+len=${#feilds[@]}
+echo $len
+for ((i=0; i<$len; i++))
 do
     read -p "enter the ${feilds[$i]} : " insertedData[$i]
     if [[ ${arr_type[$i]} == "string" ]];then
