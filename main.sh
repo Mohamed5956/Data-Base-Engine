@@ -1,6 +1,6 @@
 shopt -s extglob
 export LC_COLLATE=C
-
+echo "Hi I'm ibrahim"
 if [ -d ~/DataBase ] ; then 
     cd ~/DataBase
     echo "I ' m in DataBase"
