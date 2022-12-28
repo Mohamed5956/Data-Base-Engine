@@ -41,7 +41,7 @@ if [ -f $name ];then
 else
 	touch $name
 	read -p "enter number of columns : " colNumber
-	if [[ $colNumber =~ $regex ]];then
+	if ! [[ $colNumber =~ $regex ]];then
 		rm $name
 		break;
 	fi
