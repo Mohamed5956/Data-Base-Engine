@@ -32,29 +32,26 @@ do
             len=${#feilds[@]}
             for (( i=0 ;i<$len; i++ ))
             do 
-                # echo ${feilds[@]}
-                # echo ${feilds[1]}
-                # echo $len
-                # echo $column
                 if [[ $column == ${feilds[$i]} ]];then
                     read -p "$column = " value
                     ((i++));
                     echo "iteration : " $i;
                     valuesOfColumn=($(sed '1,2d' $name | cut -d' ' -f$i))
                     echo ${valuesOfColumn[@]}
-                    for ((j=0 ;j<${#valuesOfColumn[@]}; j++))
+                    for ((j=0 ;j<=${#valuesOfColumn[@]}; j++))
                     do
                         if [[ $value == ${valuesOfColumn[$j]} ]];then
                             if ! [[ ${valuesOfColumn[0]} =~ $intRegex ]];then
                             let c=$j+3
-                            echo $c
+                            echo $j
                             echo "im string"
-                            sed -i ''/"$c"/d'' $name
+                            `sed -i "/"$value"/d" $name`
                             else
                             let c=$j+3
-                            echo $c
+                            echo $j
                             echo "im number"
-                            sed -i ''"$c"d'' $name
+                            # sed -i ''"$c"d'' $name
+                            `sed -i "$c d" $name`
                             fi
                         fi
                     done
