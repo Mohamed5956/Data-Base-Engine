@@ -1,7 +1,5 @@
-shopt -s extglob
-export LC_COLLATE=C
-
-select choice in selectAllfromTable SelectByCol SelectRows
+echo "try"
+select choice in selectAllfromTable SelectSingleRowByCol SelectAllRowsByCol
 do 
     case $choice in 
         selectAllfromTable )
@@ -12,8 +10,8 @@ do
 	      echo "No Table Found"
         fi
         ;; 
-        SelectByCol )
-            read -p "Please enter table name : " name
+        SelectSingleRowByCol )
+        read -p "Please enter table name : " name
             if [[ -f $name ]];then
                 read -p "select * from $name where column : " column
                 declare -i flag=0
@@ -59,7 +57,7 @@ do
             echo "table not found";
             fi
         ;; 
-        SelectRows ) 
+        SelectAllRowsByCol ) 
             read -p "Please enter table name: " name
             declare -a feilds
             feilds=($(sed -n '1p' $name))
