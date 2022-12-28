@@ -58,6 +58,27 @@ do
             fi
         ;; 
         SelectByRows ) 
+            read -p "Please enter table name: " name
+            declare -a feilds
+            feilds=($(sed -n '1p' $name))
+            len=${#feilds[@]}
+            echo ${feilds[@]}
+            echo $len
+            read -p "enter the feild you want to select : " feild
+            declare -i flag=0
+            for ((i=0 ;i<$len; i++ ))
+            do
+                if [[ $feild == ${feilds[$i]} ]];then
+                    declare -i increment=$i+1
+                    cut -d" " -f$increment $name | sed '2d'
+                    flag=1;
+                    break;
+                fi
+            done
+            if [[ $flag == 0 ]];then
+                echo "feild not found";
+                echo ${feilds[@]}
+            fi
         ;;
         *) 
          echo "default"
