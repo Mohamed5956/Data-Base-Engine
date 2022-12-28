@@ -26,7 +26,7 @@ echo "Reply " $REPLY
         ;;
         updateFromTable )
         update.sh
-        ;;git
+        ;;
         deleteFromTable )
         delete.sh
         ;;
