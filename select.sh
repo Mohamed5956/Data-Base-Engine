@@ -1,4 +1,4 @@
-echo "try"
+
 select choice in selectAllfromTable SelectSingleRowByCol SelectAllRowsByCol
 do 
     case $choice in 
