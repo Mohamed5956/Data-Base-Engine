@@ -26,6 +26,9 @@ echo "Reply " $REPLY
         ;;
         updateFromTable )
         update.sh
+        ;;git
+        deleteFromTable )
+        delete.sh
         ;;
         Exit )
         echo "See You later";
