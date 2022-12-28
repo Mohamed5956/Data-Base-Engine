@@ -5,6 +5,8 @@ typeset -i colNumber
 declare -a colNames 
 declare -a dataType
 
+regex="^[0-9]+"
+
 read -p "Please enter the table name: " name
 
 flag=0
@@ -12,6 +14,12 @@ while [ $flag -eq 0 ];do
 
 if [[ $name == *['!''?'@\#\$%^\&*()-+\.\/';']* ]];then
 	echo "! @ # $ % ^ () ? + ; . -  are not allowed!"
+	read -p "Please enter a valid name: " name
+	continue
+fi
+
+if [[ $name =~ $regex ]];then
+	echo "name can't start with number "
 	read -p "Please enter a valid name: " name
 	continue
 fi
@@ -33,11 +41,10 @@ if [ -f $name ];then
 else
 	touch $name
 	read -p "enter number of columns : " colNumber
-	# if ! [[ $colNumber == ^[0-9]+$ ]];then
-	# rm $name
-	# flag=1
-	# break;
-	# fi
+	if [[ $colNumber =~ $regex ]];then
+		rm $name
+		break;
+	fi
 	for ((i=0; i<$colNumber; i++))
 	do
 	read -p "enter your feild : " colNames[$i]

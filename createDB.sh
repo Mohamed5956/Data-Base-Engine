@@ -2,7 +2,7 @@ shopt -s extglob
 export LC_COLLATE=C
 
 read -p "Please enter the database name: " name
-
+regex="^[0-9]+"
 flag=0
 while [ $flag -eq 0 ];do
 
@@ -12,8 +12,8 @@ if [[ $name == *['!''?'@\#\$%^\&*()-+\.\/';']* ]];then
 	continue
 fi
 
-if [[ $name == *[0-9]* ]];then
-	echo "Name Can't Start With Number!!"
+if [[ $name =~ $regex ]];then
+	echo "name can't start with number "
 	read -p "Please enter a valid name: " name
 	continue
 fi

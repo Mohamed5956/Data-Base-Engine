@@ -24,6 +24,9 @@ echo "Reply " $REPLY
         insertIntoTable )
         insert.sh
         ;;
+        updateFromTable )
+        update.sh
+        ;;
         Exit )
         echo "See You later";
         break;
