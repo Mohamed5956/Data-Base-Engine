@@ -30,6 +30,9 @@ echo "Reply " $REPLY
         deleteFromTable )
         delete.sh
         ;;
+        disconnect )
+        main.sh
+        ;;
         Exit )
         echo "See You later";
         break;
