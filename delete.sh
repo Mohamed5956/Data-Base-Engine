@@ -3,7 +3,7 @@ export LC_COLLATE=C
 
 declare -a feilds
 declare -a valuesOfColumn
-
+intRegex='^[0-9]+$'
 # IDArray=($(sed '1,2d' $name | cut -d' ' -f1))
 # feilds=($(sed -n '1p' $name))
 
@@ -27,7 +27,6 @@ do
         flag=0
         if [[ -e $name && $flag == 0 ]];then
             read -p "where column : " column
-            numberOfColumn=
             IDArray=($(sed '1,2d' $name | cut -d' ' -f1))
             feilds=($(sed -n '1p' $name))
             len=${#feilds[@]}
@@ -46,9 +45,17 @@ do
                     for ((j=0 ;j<${#valuesOfColumn[@]}; j++))
                     do
                         if [[ $value == ${valuesOfColumn[$j]} ]];then
+                            if ! [[ ${valuesOfColumn[0]} =~ $intRegex ]];then
                             let c=$j+3
                             echo $c
+                            echo "im string"
+                            sed -i ''/"$c"/d'' $name
+                            else
+                            let c=$j+3
+                            echo $c
+                            echo "im number"
                             sed -i ''"$c"d'' $name
+                            fi
                         fi
                     done
                 fi
