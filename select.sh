@@ -1,5 +1,5 @@
 
-select choice in selectAllfromTable SelectByCol SelectByRows
+select choice in selectAllfromTable SelectSingleRowByCol SelectAllRowsByCol
 do 
     case $choice in 
         selectAllfromTable )
@@ -10,7 +10,7 @@ do
 	      echo "No Table Found"
         fi
         ;; 
-        SelectByCol )
+        SelectSingleRowByCol )
         read -p "Please enter table name : " name
             if [[ -f $name ]];then
                 read -p "select * from $name where column : " column
@@ -57,7 +57,7 @@ do
             echo "table not found";
             fi
         ;; 
-        SelectByRows ) 
+        SelectAllRowsByCol ) 
             read -p "Please enter table name: " name
             declare -a feilds
             feilds=($(sed -n '1p' $name))
