@@ -7,31 +7,29 @@ declare -a dataType
 
 regex="^[0-9]+"
 
-read -p "Please enter the table name: " name
+# read -p "Please enter the table name: " name
 
 flag=0
 while (( $flag == 0 ));do
+read -p "Please enter the table name: " name
 
 if [[ $name == *['!''?'@\#\$%^\&*()-+\.\/';']* ]];then
 	echo "! @ # $ % ^ () ? + ; . -  are not allowed!"
-	read -p "Please enter a valid name: " name
 	continue
 fi
 
 if [[ $name =~ $regex ]];then
 	echo "name can't start with number "
-	read -p "Please enter a valid name: " name
 	continue
 fi
 
 if [[ $name = *" "* ]]; then
 	echo "spaces are not allowed!"
-	read -p "Please enter a valid name: " name
 	continue
 fi
 
 if [ -z $name ];then
-read -p "Please enter a name: " name
+	echo "name can't be empty"
 continue
 fi
 
@@ -42,19 +40,13 @@ else
 	touch $name
 	read -p "enter number of columns : " colNumber
 	colNumberRegex='^[0-9]+$'
-	if test $colNumber != $colNumberRegex 
-	then
-		echo "must be integer";
-		rm $name
-		flag=1
-		break;
-	fi
+	if [[ $colNumber =~ $colNumberRegex ]];then
 	for ((i=0; i<$colNumber; i++))
-	do
-		read -p "enter your feild : " colNames[$i]
-		echo ${colNames[$i]}
-		# validation for regex
-		numberRegex='^[0-9][a-zA-Z]+'
+		do
+			read -p "enter your feild : " colNames[$i]
+			echo ${colNames[$i]}
+			# validation for regex
+			numberRegex='^[0-9][a-zA-Z]+'
 			if [[ ${colNames[$i]} =~ $numberRegex ]];then
 				echo "Name Can't Start with Number !!"
 				rm $name
@@ -67,28 +59,34 @@ else
 				flag=1
 				break;
 			fi
-		read -p "enter data type : " dataType[$i]
+			read -p "enter data type : " dataType[$i]
 	# end of validation
 	# validation for int and string dataTypes
-		if [[ ${dataType[$i]} == "int" ]];then
-			continue
-		elif [[ ${dataType[$i]} == "string" ]];then
-			continue
-		else
-			echo "Wrong value for certain data types your data type must be 'int' or 'string' only "
-			rm $name
-			flag=1
-			break;
-		fi
+			if [[ ${dataType[$i]} == "int" ]];then
+				continue
+			elif [[ ${dataType[$i]} == "string" ]];then
+				continue
+			else
+				echo "Wrong value for certain data types your data type must be 'int' or 'string' only "
+				rm $name
+				flag=1
+				break;
+			fi
 	# end of validation for data 
-	done
-	# "${array[i]}$i"
-	echo $flag
-	if (( $flag == 0 ));then
-		echo ${colNames[@]} >> $name
-		echo ${dataType[@]} >> $name
-		echo "Table created successfully"
+		done
+	else
+		echo "must be integer";
+		rm $name
 		flag=1
+		break;
+	# "${array[i]}$i"
+		echo $flag
+		if (( $flag == 0 ));then
+			echo ${colNames[@]} >> $name
+			echo ${dataType[@]} >> $name
+			echo "Table created successfully"
+			flag=1
+		fi
 	fi
 fi
 
