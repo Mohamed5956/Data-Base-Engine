@@ -3,10 +3,12 @@ export LC_COLLATE=C
 
 declare -a feilds
 declare -a valuesOfColumn
+declare -a IDArray
 intRegex='^[0-9]+$'
 
 read -p "update from Table : " name
 feilds=($(sed -n '1p' $name))
+IDArray=($(sed '1,2d' $name | cut -d' ' -f1))
 len=${#feilds[@]}
 
 if [[ -f $name ]];then
@@ -17,22 +19,23 @@ if [[ -f $name ]];then
             if [[ $column == ${feilds[$i]} ]];then
                 read -p "$column = " value
                 ((i++));
-                echo "iteration : " $i;
+                # echo "iteration : " $i;
                 valuesOfColumn=($(sed '1,2d' $name | cut -d' ' -f$i))
-                echo ${valuesOfColumn[@]}
+                # echo ${valuesOfColumn[@]}
                     for ((j=0 ;j<${#valuesOfColumn[@]}; j++))
                     do
-                        # sed -i "s/$value/$newValue/g" $name
                         if [[ $value == ${valuesOfColumn[$j]} ]];then
-                            read -p "enter new value : " newValue
-                            if ! [[ $valuesOfColumn[0] =~ $intRegex ]];then
-                                let c=$j+3
-                                echo $c
-                                sed -i "s/$value/$newValue/g" $name
+                            let c=$j+3
+                            sed -n "$c"p $name
+                            read -p "Do you want to update this row ? Y/N" answer
+                            if [[ $answer == 'y' || $answer == 'Y' ]];then
+                                read -p "enter new value : " newValue
+                                sed -i "${c}s/$value/$newValue/" $name
+                            elif [[ $answer == 'n' || $answer == 'N' ]];then
+                                echo " As you like :) "
                             else
-                                let c=$j+3
-                                echo $c
-                                sed "s/$value/$newValue/"
+                                echo "you enterd wrong input it must be Y/y or N/n Only";
+                                ((j--))
                             fi
                         fi
                     done
