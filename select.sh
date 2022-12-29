@@ -47,6 +47,7 @@ do
             read -p "Please enter table name: " name
             declare -a feilds
             feilds=($(sed -n '1p' $name))
+            
             len=${#feilds[@]}
             echo ${feilds[@]}
             echo $len
