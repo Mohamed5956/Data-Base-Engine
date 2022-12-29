@@ -27,7 +27,7 @@ if [[ -f $name ]];then
                         if [[ $value == ${valuesOfColumn[$j]} ]];then
                             let c=$j+3
                             sed -n "$c"p $name
-                            read -p "Do you want to update this row ? Y/N" answer
+                            read -p "Do you want to update this row ? Y/N  " answer
                             if [[ $answer == 'y' || $answer == 'Y' ]];then
                                 read -p "enter new value : " newValue
                                 f=0

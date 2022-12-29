@@ -1,6 +1,6 @@
 shopt -s extglob
 export LC_COLLATE=C
-echo "Hi I'm ibrahim"
+
 if [ -d ~/DataBase ] ; then 
     cd ~/DataBase
     echo "I ' m in DataBase"
@@ -15,7 +15,7 @@ fi
 # export regex='+([a-zA-Z0-9_])'
 select choice in CreateDB ListDB ConnectDB DropDB Exit
 do
-echo "Reply " $REPLY 
+#echo "Reply " $REPLY 
     case $choice in 
         CreateDB )
         createDB.sh
@@ -50,6 +50,6 @@ echo "Reply " $REPLY
         break;
         ;;
         *) 
-         echo "default"
+         echo "Enter the Right Number between 1 to 5"
     esac
 done
