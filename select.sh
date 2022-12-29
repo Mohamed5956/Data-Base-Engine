@@ -18,38 +18,24 @@ do
                 declare -a feilds
                 feilds=($(sed -n '1p' $name))
                 len=${#feilds[@]}
-                echo ${feilds[@]}
-                echo $len
-                for ((i=0; i<$len; i++))
-                do
-                    if [[ $column == ${feilds[$i]} ]];then
-                        read -p "value = " value
-                        echo $name
-                        awk -F" " -v userData="$value" '
-                        BEGIN{
-                            f=0
-                        }
-                        {
-                            i=1
-                            while(i <= NF){
-                                if($i == userData)
-                                {
-                                    print $0
-                                    f=1
-                                }
-                                i++
-                            }
-                        }
-                        END{
-                            if(f == 0){
-                                print "no values found"
-                            }
-                        }
-                        ' $name
-                        flag=1
-                        break;
-                    fi
-                done
+                for (( i=0 ;i<$len; i++ ))
+            do 
+                if [[ $column == ${feilds[$i]} ]];then
+                    read -p "$column = " value
+                    ((i++));
+                    # echo "iteration : " $i;
+                    valuesOfColumn=($(sed '1,2d' $name | cut -d' ' -f$i))
+                    # echo ${valuesOfColumn[@]}
+                    for ((j=0 ;j<=${#valuesOfColumn[@]}; j++))
+                    do
+                        if [[ $value == ${valuesOfColumn[$j]} ]];then    
+                                let c=$j+3
+                                sed -n "$c p" $name
+                                flag=1
+                        fi
+                    done
+                fi
+            done
                 if [[ $flag == 0 ]];then
                     echo "there's no column found"
                 fi
