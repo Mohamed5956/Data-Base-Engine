@@ -6,6 +6,7 @@ declare -a colNames
 declare -a dataType
 
 regex="^[0-9]+"
+colNumberRegex='^[0-9]+$'
 
 # read -p "Please enter the table name: " name
 
@@ -39,8 +40,12 @@ while (($flag == 0)); do
 	else
 		touch $name
 		read -p "enter number of columns : " colNumber
-		colNumberRegex='^[0-9]+$'
-		if [[ $colNumber =~ $colNumberRegex ]]; then
+		if [[ $colNumber == "g" ]]; then
+			echo "must be integer"
+			flag=1
+			rm $name
+			break
+		else
 			for ((i = 0; i < $colNumber; i++)); do
 				read -p "enter your feild : " colNames[$i]
 				echo ${colNames[$i]}
@@ -73,19 +78,14 @@ while (($flag == 0)); do
 				fi
 				# end of validation for data
 			done
+
 			if (($flag == 0)); then
 				echo ${colNames[@]} >>$name
 				echo ${dataType[@]} >>$name
 				echo "Table created successfully"
 				flag=1
 			fi
-		else
-			echo "must be integer"
-			rm $name
-			flag=1
-			break
-			# "${array[i]}$i"
-			echo $flag
+
 		fi
 	fi
 

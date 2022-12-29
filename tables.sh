@@ -1,43 +1,43 @@
-select choice in CreateTable ListTable dropTable SelectFromTable insertIntoTable updateFromTable deleteFromTable disconnect
-do
+select choice in CreateTable ListTable dropTable SelectFromTable insertIntoTable updateFromTable deleteFromTable disconnect; do
 
-    case $choice in 
-        CreateTable )
+    case $choice in
+    CreateTable)
         createTable.sh
-        ;; 
-        ListTable ) 
+        ;;
+    ListTable)
         echo "ListTable"
-          ls -F | grep -v "/"  
-        ;; 
-        dropTable )
+        ls -F | grep -v "/"
+        ;;
+    dropTable)
         read -p "Enter Name of Table : " name
-            if [ -e $name ] ;then
-                rm $name
-                echo "Table Deleted"
-            else 
-                echo "Table not found"
-            fi 
+        if [ -e $name ]; then
+            rm $name
+            echo "Table Deleted"
+        else
+            echo "Table not found"
+        fi
         ;;
-        SelectFromTable ) 
-            select.sh
+    SelectFromTable)
+        select.sh
         ;;
-        insertIntoTable )
+    insertIntoTable)
         insert.sh
         ;;
-        updateFromTable )
+    updateFromTable)
         update.sh
         ;;
-        deleteFromTable )
+    deleteFromTable)
         delete.sh
         ;;
-        disconnect )
+    disconnect)
         main.sh
         ;;
-        Exit )
-        echo "See You later";
-        break;
+    Exit)
+        echo "See You later"
+        break
         ;;
-        *) 
-         echo "default"
+    *)
+        echo "default"
+        ;;
     esac
 done
