@@ -73,6 +73,12 @@ while (($flag == 0)); do
 				fi
 				# end of validation for data
 			done
+			if (($flag == 0)); then
+				echo ${colNames[@]} >>$name
+				echo ${dataType[@]} >>$name
+				echo "Table created successfully"
+				flag=1
+			fi
 		else
 			echo "must be integer"
 			rm $name
@@ -80,12 +86,6 @@ while (($flag == 0)); do
 			break
 			# "${array[i]}$i"
 			echo $flag
-			if (($flag == 0)); then
-				echo ${colNames[@]} >>$name
-				echo ${dataType[@]} >>$name
-				echo "Table created successfully"
-				flag=1
-			fi
 		fi
 	fi
 
