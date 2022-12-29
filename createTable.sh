@@ -1,7 +1,7 @@
 shopt -s extglob
 export LC_COLLATE=C
 
-typeset -i colNumber
+# typeset -i colNumber
 declare -a colNames
 declare -a dataType
 
@@ -40,7 +40,7 @@ while (($flag == 0)); do
 	else
 		touch $name
 		read -p "enter number of columns : " colNumber
-		if [[ $colNumber == "g" ]]; then
+		if ! [[ $colNumber =~ $colNumberRegex ]]; then
 			echo "must be integer"
 			flag=1
 			rm $name
@@ -90,5 +90,3 @@ while (($flag == 0)); do
 	fi
 
 done
-
-# ((i++))
