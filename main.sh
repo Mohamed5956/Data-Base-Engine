@@ -29,7 +29,6 @@ select choice in CreateDB ListDB ConnectDB DropDB Exit; do
         if [ -d $name ]; then
             echo "I connect DB : $name"
             cd $name
-            pwd
             tables.sh
         else
             echo "Error i Can't Connect to this DB "
