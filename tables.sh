@@ -1,6 +1,6 @@
 select choice in CreateTable ListTable dropTable SelectFromTable insertIntoTable updateFromTable deleteFromTable disconnect
 do
-echo "Reply " $REPLY 
+
     case $choice in 
         CreateTable )
         createTable.sh

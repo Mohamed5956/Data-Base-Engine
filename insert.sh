@@ -14,9 +14,9 @@ if [[ -f $name ]]; then
     IDArray=($(sed '1,2d' $name | cut -d' ' -f1))
     feilds=($(sed -n '1p' $name))
     # test
-    echo ${feilds[@]}
-    echo ${arr_type[@]}
-    echo ${IDArray[@]}
+    #echo ${feilds[@]}
+    #echo ${arr_type[@]}
+    #echo ${IDArray[@]}
     # length of feilds array
     len=${#feilds[@]}
     # lenOfIdArray=${#IDArray[@]}
@@ -31,6 +31,17 @@ if [[ -f $name ]]; then
                 echo "wrong value for type string"
                 break
             fi
+<<<<<<< HEAD
+        else 
+            if [[ ${insertedData[$i]} =~ $intRegex ]];then
+                for ((j=0; j<${#IDArray[@]}; j++))
+                do
+                    # echo ${insertedData[$i]}
+                   #   echo ${IDArray[$j]}
+                    if [[ ${insertedData[$i]} == ${IDArray[$j]} ]];then
+                    echo "ID must be unique";
+                    read -p "enter the ${feilds[$i]} : " insertedData[$i];
+=======
         else
             if [[ ${insertedData[$i]} =~ $intRegex ]]; then
                 for ((j = 0; j < ${#IDArray[@]}; j++)); do
@@ -39,6 +50,7 @@ if [[ -f $name ]]; then
                     if [[ ${insertedData[$i]} == ${IDArray[$j]} ]]; then
                         echo "ID must be unique"
                         read -p "enter the ${feilds[$i]} : " insertedData[$i]
+>>>>>>> 2a2bfe98e2962393077c582dfda19a102f39cbbd
                     fi
                 done
                 continue
