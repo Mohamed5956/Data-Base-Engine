@@ -35,7 +35,7 @@ while (($flag == 0)); do
 
 	if [ -f $name ]; then
 		echo "Table already exists"
-		read -p "Please enter another name: " name
+		continue
 	else
 		touch $name
 		read -p "enter number of columns : " colNumber
