@@ -3,12 +3,12 @@ export LC_COLLATE=C
 
 declare -a feilds
 declare -a valuesOfColumn
-declare -a IDArray
+declare -a PKArray
 intRegex='^[0-9]+$'
 
 read -p "update from Table : " name
 feilds=($(sed -n '1p' $name))
-IDArray=($(sed '1,2d' $name | cut -d' ' -f1))
+PKArray=($(sed '1,2d' $name | cut -d' ' -f1))
 len=${#feilds[@]}
 
 if [[ -f $name ]];then
@@ -30,7 +30,18 @@ if [[ -f $name ]];then
                             read -p "Do you want to update this row ? Y/N" answer
                             if [[ $answer == 'y' || $answer == 'Y' ]];then
                                 read -p "enter new value : " newValue
+                                f=0
+                                for (( k=0;k<${#PKArray[@]};k++ ))
+                                do 
+                                    if [[ $newValue == ${PKArray[$k]} ]];then
+                                        f=1;
+                                        echo "Primary key must be unique !!!"
+                                        break;
+                                    fi
+                                done
+                                if [[ $f == 0 ]];then
                                 sed -i "${c}s/$value/$newValue/" $name
+                                fi
                             elif [[ $answer == 'n' || $answer == 'N' ]];then
                                 echo " As you like :) "
                             else
