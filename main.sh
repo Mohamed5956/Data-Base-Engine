@@ -25,7 +25,7 @@ select choice in CreateDB ListDB ConnectDB DropDB Exit; do
         ;;
     ConnectDB)
         echo "ConnectDB"
-        read -p "Enter Name of Folder : " name
+        read -p "Enter Name of DataBase : " name
         if [ -d $name ]; then
             echo "I connect DB : $name"
             cd $name
