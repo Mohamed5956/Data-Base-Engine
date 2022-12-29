@@ -22,12 +22,18 @@ if [[ -f $name ]];then
                 echo ${valuesOfColumn[@]}
                     for ((j=0 ;j<${#valuesOfColumn[@]}; j++))
                     do
-                # sed -i "s/$value/$newValue/g" $name
+                        # sed -i "s/$value/$newValue/g" $name
                         if [[ $value == ${valuesOfColumn[$j]} ]];then
-                            read -p "enter your new value" newValue
-                            # let c=$j+3
-                        # echo $c
-                            sed -i "s/$value/$newValue/g" $name
+                            read -p "enter new value : " newValue
+                            if ! [[ $valuesOfColumn[0] =~ $intRegex ]];then
+                                let c=$j+3
+                                echo $c
+                                sed -i "s/$value/$newValue/g" $name
+                            else
+                                let c=$j+3
+                                echo $c
+                                sed "s/$value/$newValue/"
+                            fi
                         fi
                     done
                 fi

@@ -18,7 +18,7 @@ do
                 declare -a feilds
                 feilds=($(sed -n '1p' $name))
                 len=${#feilds[@]}
-                for (( i=0 ;i<$len; i++ ))
+            for (( i=0 ;i<$len; i++ ))
             do 
                 if [[ $column == ${feilds[$i]} ]];then
                     read -p "$column = " value
