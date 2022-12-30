@@ -23,7 +23,6 @@ select choice in TruncateTable deleteSingleRecord; do
         flag=0
         if [[ -e $name ]]; then
             read -p "where column : " column
-            IDArray=($(sed '1,2d' $name | cut -d' ' -f1))
             feilds=($(sed -n '1p' $name))
             len=${#feilds[@]}
             declare -i counter=0
@@ -59,8 +58,8 @@ select choice in TruncateTable deleteSingleRecord; do
             fi
             if [[ $f == 1 ]];then
                 echo 'Data Deleted Successfully'
-                # echo ${findedValues[@]} 
                 findedValues=()
+                valuesOfColumn=()
             else
                 echo 'column or value not found'
             fi
