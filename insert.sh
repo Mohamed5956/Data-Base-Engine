@@ -8,20 +8,14 @@ declare -a insertedData
 intRegex='^[0-9]+$'
 stringRegex='^[a-zA-z]+$'
 read -p "Enter table name " name
+arr_type=($(sed -n '2p' $name))
+
+IDArray=($(sed '1,2d' $name | cut -d' ' -f1))
+feilds=($(sed -n '1p' $name))
+# length of feilds array
+len=${#feilds[@]}
 flag=0
 if [[ -f $name ]]; then
-    arr_type=($(sed -n '2p' $name))
-
-    IDArray=($(sed '1,2d' $name | cut -d' ' -f1))
-    feilds=($(sed -n '1p' $name))
-    # test
-    #echo ${feilds[@]}
-    #echo ${arr_type[@]}
-    #echo ${IDArray[@]}
-    # length of feilds array
-    len=${#feilds[@]}
-    # lenOfIdArray=${#IDArray[@]}
-    # echo $len
     for ((i = 0; i < $len; i++)); do
         read -p "enter the ${feilds[$i]} : " insertedData[$i]
         if [[ ${arr_type[$i]} == "string" ]]; then
@@ -37,6 +31,7 @@ if [[ -f $name ]]; then
                 for ((j = 0; j < ${#IDArray[@]}; j++)); do
                     if [[ ${insertedData[$i]} == ${IDArray[$j]} ]]; then
                         echo "ID must be unique"
+                        ((j--))
                         read -p "enter the ${feilds[$i]} : " insertedData[$i]
                     fi
                 done
