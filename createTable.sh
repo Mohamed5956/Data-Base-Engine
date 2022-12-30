@@ -8,8 +8,6 @@ declare -a dataType
 regex="^[0-9]+"
 colNumberRegex='^[0-9]+$'
 
-# read -p "Please enter the table name: " name
-
 flag=0
 while (($flag == 0)); do
 	read -p "Please enter the table name: " name
