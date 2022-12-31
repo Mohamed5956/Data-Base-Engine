@@ -1,31 +1,38 @@
-shopt -s extglob
-export LC_COLLATE=C
-
 declare -a feilds
 declare -a valuesOfColumn
+declare -a IDArray
 declare -a PKArray
-# intRegex='^[0-9]+$'
+intRegex='^[0-9]+$'
 
 read -p "update from Table : " name
-if [[ -f $name ]]; then
 feilds=($(sed -n '1p' $name))
+IDArray=($(sed '1,2d' $name | cut -d' ' -f1))
 PKArray=($(sed '1,2d' $name | cut -d' ' -f1))
 len=${#feilds[@]}
+
+if [[ -f $name ]]; then
     read -p "set : " column
-    # flag=0
+    flag=0
     for ((i = 0; i < $len; i++)); do
         if [[ $column == ${feilds[$i]} ]]; then
             read -p "$column = " value
             ((i++))
+            # echo "iteration : " $i;
             valuesOfColumn=($(sed '1,2d' $name | cut -d' ' -f$i))
+            # echo ${valuesOfColumn[@]}
             for ((j = 0; j < ${#valuesOfColumn[@]}; j++)); do
                 if [[ $value == ${valuesOfColumn[$j]} ]]; then
                     let c=$j+3
                     sed -n "$c"p $name
-                    read -p "Do you want to update this row ? Y/N :  " answer
+                    read -p "Do you want to update this row ? Y/N" answer
                     if [[ $answer == 'y' || $answer == 'Y' ]]; then
+                        read -p "enter new value : " newValue
+                        f=0
+                        for ((k = 0; k < ${#PKArray[@]}; k++)); do
+                            if [[ $newValue == ${PKArray[$k]} ]]; then
+                                f=1
                                 echo "Primary key must be unique !!!"
-                                break
+                                ((j--))
                             fi
                         done
                         if [[ $f == 0 ]]; then
@@ -44,3 +51,6 @@ len=${#feilds[@]}
 else
     echo "table not found"
 fi
+# update from tableName
+# set id = dgfsk
+# where id =
