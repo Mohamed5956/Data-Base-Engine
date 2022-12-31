@@ -33,11 +33,12 @@ select choice in TruncateTable deleteSingleRecord; do
                             let c=$j+3
                             findedValues[$findCounter]=$c
                             let findCounter=$findCounter+1
+                            f=1
                         fi
                     done
                 fi
             done
-            f=0
+            
             # to shift the file then sed the file
             if ((${#findedValues[@]})); then
                 for ((k = 0; k < $findCounter; k++)); do
@@ -47,7 +48,7 @@ select choice in TruncateTable deleteSingleRecord; do
                         findedValues[$m]=$counter
                     done
                 done
-                f=1
+                
             else
                 f=0
             fi

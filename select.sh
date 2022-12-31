@@ -41,11 +41,11 @@ select choice in selectAllfromTable SelectRowsByValue SelectAllRowsByCol; do
         ;;
     SelectAllRowsByCol )
         read -p "Please enter table name: " name
+        if [[ -f $name ]]; then
         declare -a feilds
         feilds=($(sed -n '1p' $name))
         len=${#feilds[@]}
         echo ${feilds[@]}
-        echo $len
         read -p "enter the feild you want to select : " feild
         declare -i flag=0
         for ((i = 0; i < $len; i++)); do
@@ -60,9 +60,12 @@ select choice in selectAllfromTable SelectRowsByValue SelectAllRowsByCol; do
             echo "feild not found"
             echo ${feilds[@]}
         fi
+         else
+            echo "table not found"
+        fi
         ;;
     *)
-        echo "default"
+        echo "select between 1 to 3"
         ;;
     esac
 done

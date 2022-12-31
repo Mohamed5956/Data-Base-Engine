@@ -12,9 +12,15 @@ select choice in CreateTable ListTable dropTable SelectFromTable insertIntoTable
     dropTable)
         read -p "Enter Name of Table : " name
         if [ -e $name ]; then
-        read -p "are you sure u want to delete $name " answer
+        read -p "Do you want to Drop Table ? Y/N  : " answer
+        if [[ $answer == 'y' || $answer == 'Y' ]]; then
             rm $name
             echo "Table Deleted"
+        elif [[ $answer == 'n' || $answer == 'N' ]]; then
+            echo " As you like :) "
+        else
+        echo "you enterd wrong input it must be Y/y or N/n Only"
+        fi
         else
             echo "Table not found"
         fi

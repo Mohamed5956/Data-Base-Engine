@@ -37,8 +37,15 @@ select choice in CreateDB ListDB ConnectDB DropDB Exit; do
     DropDB)
         read -p "Enter Name of DataBase : " name
         if [ -e $name ]; then
+        read -p "Do you want to Drop Dtabase ? Y/N  : " answer
+        if [[ $answer == 'y' || $answer == 'Y' ]]; then
             rm -r $name
             echo "DB Deleted"
+        elif [[ $answer == 'n' || $answer == 'N' ]]; then
+            echo " As you like :) "
+        else
+        echo "you enterd wrong input it must be Y/y or N/n Only"
+        fi
         else
             echo "DB not found"
         fi
