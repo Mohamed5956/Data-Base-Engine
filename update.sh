@@ -22,6 +22,7 @@ if [[ -f $name ]]; then
             valuesOfColumn=($(sed '1,2d' $name | cut -d' ' -f$i))
             for ((j = 0; j < ${#valuesOfColumn[@]}; j++)); do
             flag=0
+            echo "merge ibrahim"
                 if [[ $value == ${valuesOfColumn[$j]} ]]; then
                     let c=$j+3
                     sed -n "$c"p $name
