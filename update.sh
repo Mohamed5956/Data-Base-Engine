@@ -27,7 +27,7 @@ len=${#feilds[@]}
                                 echo "Primary key must be unique !!!"
                                 break
                             fi
-                        done
+                         done
                         if [[ $f == 0 ]]; then
                             sed -i "${c}s/$value/$newValue/" $name
                         fi
