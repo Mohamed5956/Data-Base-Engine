@@ -47,6 +47,7 @@ select choice in TruncateTable deleteSingleRecord; do
                         let counter=${findedValues[$m]}-1
                         findedValues[$m]=$counter
                     done
+                    f=1
                 done
                 
             else
@@ -54,6 +55,7 @@ select choice in TruncateTable deleteSingleRecord; do
             fi
             if [[ $f == 1 ]]; then
                 echo 'Data Deleted Successfully'
+                f=0
             else
                 echo 'column or value not found'
             fi
