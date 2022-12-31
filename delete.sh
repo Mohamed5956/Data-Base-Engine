@@ -41,7 +41,7 @@ select choice in TruncateTable deleteSingleRecord; do
             # to shift the file then sed the file
             if ((${#findedValues[@]}));then
                 for ((k = 0; k < $findCounter; k++)); do
-                    $(sed -i "${findedV if [[ $value == ${valuesOfColumn[$j]} ]]; thenalues[$k]}d" $name)
+                    $(sed -i "${findedValues[$k]}d" $name)
                     for ((m = $k; m < $findCounter; m++)); do
                         let counter=${findedValues[$m]}-1
                         findedValues[$m]=$counter
