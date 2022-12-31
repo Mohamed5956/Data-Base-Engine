@@ -5,17 +5,20 @@ select choice in CreateTable ListTable dropTable SelectFromTable insertIntoTable
         createTable.sh
         ;;
     ListTable)
-        echo "ListTable"
+        echo "Table List : "
         ls -F | grep -v "/"
+        tables.sh
         ;;
     dropTable)
         read -p "Enter Name of Table : " name
         if [ -e $name ]; then
+        read -p "are you sure u want to delete $name " answer
             rm $name
             echo "Table Deleted"
         else
             echo "Table not found"
         fi
+        tables.sh
         ;;
     SelectFromTable)
         select.sh
