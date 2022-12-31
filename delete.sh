@@ -30,16 +30,16 @@ select choice in TruncateTable deleteSingleRecord; do
                     # echo ${valuesOfColumn[@]}
                     for ((j = 0; j <= ${#valuesOfColumn[@]}; j++)); do
                         if [[ $value == ${valuesOfColumn[$j]} ]]; then
-                                let c=$j+3
-                                findedValues[$findCounter]=$c
-                                let findCounter=$findCounter+1
+                            let c=$j+3
+                            findedValues[$findCounter]=$c
+                            let findCounter=$findCounter+1
                         fi
                     done
                 fi
             done
             f=0
             # to shift the file then sed the file
-            if ((${#findedValues[@]}));then
+            if ((${#findedValues[@]})); then
                 for ((k = 0; k < $findCounter; k++)); do
                     $(sed -i "${findedValues[$k]}d" $name)
                     for ((m = $k; m < $findCounter; m++)); do
@@ -48,10 +48,10 @@ select choice in TruncateTable deleteSingleRecord; do
                     done
                 done
                 f=1
-                else
+            else
                 f=0
             fi
-            if [[ $f == 1 ]];then
+            if [[ $f == 1 ]]; then
                 echo 'Data Deleted Successfully'
             else
                 echo 'column or value not found'
