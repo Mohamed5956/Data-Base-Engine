@@ -1,12 +1,6 @@
 shopt -s extglob
 export LC_COLLATE=C
 
-declare -a feilds
-declare -a valuesOfColumn
-declare -a findedValues
-declare -i findCounter=0
-intRegex='^[0-9]+$'
-
 select choice in TruncateTable deleteSingleRecord; do
     case $choice in
     TruncateTable)
@@ -25,6 +19,7 @@ select choice in TruncateTable deleteSingleRecord; do
             read -p "where column : " column
             feilds=($(sed -n '1p' $name))
             len=${#feilds[@]}
+            findCounter=0
             declare -i counter=0
             for ((i = 0; i < $len; i++)); do
                 if [[ $column == ${feilds[$i]} ]]; then
@@ -58,8 +53,6 @@ select choice in TruncateTable deleteSingleRecord; do
             fi
             if [[ $f == 1 ]];then
                 echo 'Data Deleted Successfully'
-                findedValues=()
-                valuesOfColumn=()
             else
                 echo 'column or value not found'
             fi

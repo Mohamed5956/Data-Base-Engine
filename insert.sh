@@ -2,7 +2,7 @@ shopt -s extglob
 export LC_COLLATE=C
 
 declare -a feilds
-declare -a ar_type
+declare -a arr_type
 declare -a IDArray
 declare -a insertedData
 intRegex='^[0-9]+$'
