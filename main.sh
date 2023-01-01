@@ -31,21 +31,27 @@ select choice in CreateDB ListDB ConnectDB DropDB Exit; do
             cd $name
             tables.sh
         else
-            echo "Error i Can't Connect to this DB "
+            zenity --error \
+                --title "Error Message" \
+                --width 500 \
+                --height 100 \
+                --text "Error i Can't Connect to this DB ."
         fi
         ;;
     DropDB)
         read -p "Enter Name of DataBase : " name
         if [ -e $name ]; then
-        read -p "Do you want to Drop Dtabase ? Y/N  : " answer
-        if [[ $answer == 'y' || $answer == 'Y' ]]; then
-            rm -r $name
-            echo "DB Deleted"
-        elif [[ $answer == 'n' || $answer == 'N' ]]; then
-            echo " As you like :) "
-        else
-        echo "you enterd wrong input it must be Y/y or N/n Only"
-        fi
+            zenity --question \
+                --title "Confirm Proccess" \
+                --width 500 \
+                --height 100 \
+                --text "Choose Yes Or No to Drop the Database . "
+            if [[ $? == 0 ]]; then
+                rm -r $name
+                echo "DB Deleted"
+            else
+                echo " As you like :) "
+            fi
         else
             echo "DB not found"
         fi
