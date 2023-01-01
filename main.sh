@@ -97,6 +97,7 @@ select choice in CreateDB ListDB ConnectDB DropDB Exit; do
        --width 500 \
        --height 100 \
        --text "You Must Enter Number between 1 to 5"
+       main.sh
         ;;
     esac
 done
