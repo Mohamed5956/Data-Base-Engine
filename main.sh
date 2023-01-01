@@ -39,7 +39,11 @@ select choice in CreateDB ListDB ConnectDB DropDB Exit; do
         fi
         ;;
     DropDB)
-        read -p "Enter Name of DataBase : " name
+        name=$(zenity --entry \
+            --width 500 \
+            --title "check Data Base" \
+            --text "Enter your Data Base ");
+        echo $name
         if [ -e $name ]; then
             zenity --question \
                 --title "Confirm Proccess" \
