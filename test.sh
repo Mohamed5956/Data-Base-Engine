@@ -22,7 +22,7 @@
 # fi
 
 
-  cd ~/DataBase
+#   cd ~/DataBase
 #         echo "ListDB"
 #         ls -F | grep "/"
 

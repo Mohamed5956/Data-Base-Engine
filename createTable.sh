@@ -141,7 +141,7 @@ while (($flag == 0)); do
 				echo ${dataType[@]} >>$name
 				#echo "Table created successfully"
 				zenity --info \
-				--title "Create Database" \
+				--title "Create Table" \
 				--width 500 \
 				--height 100 \
 				--text "Table created successfully."
