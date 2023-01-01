@@ -4,8 +4,6 @@ export LC_COLLATE=C
 if [ -d ~/DataBase ]; then
     cd ~/DataBase
     echo "I ' m in DataBase"
-    echo "avaliable databases : "
-    ls -F | grep "/"
 else
     mkdir ~/DataBase
     echo "I Create  DataBase Folder"
@@ -22,10 +20,15 @@ select choice in CreateDB ListDB ConnectDB DropDB Exit; do
     ListDB)
         echo "ListDB"
         ls -F | grep "/"
+        main.sh
         ;;
     ConnectDB)
         echo "ConnectDB"
-        read -p "Enter Name of DataBase : " name
+        #read -p "Enter Name of DataBase : " name
+            name=$(zenity --entry \
+            --width 500 \
+            --title "check Data Base" \
+            --text "Enter Database ");
         if [ -d $name ]; then
             echo "I connect DB : $name"
             cd $name
@@ -44,7 +47,6 @@ select choice in CreateDB ListDB ConnectDB DropDB Exit; do
             --width 500 \
             --title "check Data Base" \
             --text "Enter your Data Base ");
-        echo $name
         if [ -e $name ]; then
             zenity --question \
                 --title "Confirm Proccess" \
@@ -53,20 +55,48 @@ select choice in CreateDB ListDB ConnectDB DropDB Exit; do
                 --text "Choose Yes Or No to Drop the Database . "
             if [[ $? == 0 ]]; then
                 rm -r $name
-                echo "DB Deleted"
+               # echo "DB Deleted"
+                zenity --info \
+                --title "Database Confirm" \
+                --width 500 \
+                --height 100 \
+                --text "Database Deleted"
+                main.sh
             else
-                echo " As you like :) "
+                #echo " As you like :) "
+                zenity --info \
+                --title "Database Confirm" \
+                --width 500 \
+                --height 100 \
+                --text "As you like :)"
+                main.sh
             fi
         else
-            echo "DB not found"
+            #echo "DB not found"
+                zenity --error \
+                --title "Error Message" \
+                --width 500 \
+                --height 100 \
+                --text "Database Not Founded."
+                main.sh
         fi
         ;;
     Exit)
-        echo "See You later"
+        #echo "See You later"
+        zenity --info \
+       --title "You Exit" \
+       --width 500 \
+       --height 100 \
+       --text "OK! See You later"
         break
         ;;
     *)
-        echo "Enter the Right Number between 1 to 5"
+        #echo "Enter the Right Number between 1 to 5"
+        zenity --warning \
+       --title "Warning Message" \
+       --width 500 \
+       --height 100 \
+       --text "You Must Enter Number between 1 to 5"
         ;;
     esac
 done
