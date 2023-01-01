@@ -41,12 +41,8 @@ select choice in CreateTable ListTable dropTable SelectFromTable insertIntoTable
     disconnect)
         main.sh
         ;;
-    Exit)
-        echo "See You later"
-        break
-        ;;
     *)
-        echo "default"
+        echo "Enter number between 1 to 8"
         ;;
     esac
 done

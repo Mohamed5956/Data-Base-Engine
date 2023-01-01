@@ -1,15 +1,17 @@
 shopt -s extglob
 export LC_COLLATE=C
 
-select choice in TruncateTable deleteSingleRecord; do
+select choice in TruncateTable deleteSingleRecord returnTOtablesChoise; do
     case $choice in
     TruncateTable)
         read -p "Enter Table you want to truncate : " name
         if [[ -e $name ]]; then
             sed -i '3,$d' $name
             echo "All Data Deleted :) "
+            delete.sh
         else
-            echo "there's no table found"
+            echo "Table Not Founded"
+            delete.sh
         fi
         ;;
     deleteSingleRecord)
@@ -56,12 +58,23 @@ select choice in TruncateTable deleteSingleRecord; do
             if [[ $f == 1 ]]; then
                 echo 'Data Deleted Successfully'
                 f=0
+                delete.sh
             else
                 echo 'column or value not found'
+                delete.sh
             fi
         else
-            echo "there's no table found"
+            echo "Table Not Founded"
+            delete.sh
         fi
+        ;;
+    returnTOtablesChoise )
+        tables.sh
+       ;;
+    *)
+        echo "select between 1 to 3"
+        delete.sh
         ;;
     esac
 done
+tables.sh

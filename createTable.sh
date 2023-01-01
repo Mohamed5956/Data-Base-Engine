@@ -88,3 +88,4 @@ while (($flag == 0)); do
 	fi
 
 done
+tables.sh

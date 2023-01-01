@@ -37,6 +37,7 @@ select choice in CreateDB ListDB ConnectDB DropDB Exit; do
                 --height 100 \
                 --text "Error i Can't Connect to this DB ."
         fi
+        main.sh
         ;;
     DropDB)
         name=$(zenity --entry \

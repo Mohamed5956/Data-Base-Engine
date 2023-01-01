@@ -5,6 +5,8 @@
 
 intRegex='^[0-9]+$'
 stringRegex='^[a-zA-Z]+$'
+checkField=0
+checkValue=0
 
 read -p "update from Table : " name
 
@@ -16,6 +18,7 @@ if [[ -f $name ]]; then
     read -p "set : " column
     for ((i = 0; i < $len; i++)); do
         if [[ $column == ${feilds[$i]} ]]; then
+            checkField=1
             columnNumber=$i
             read -p "$column = " value
             ((i++))
@@ -23,6 +26,7 @@ if [[ -f $name ]]; then
             for ((j = 0; j < ${#valuesOfColumn[@]}; j++)); do
                 flag=0
                 if [[ $value == ${valuesOfColumn[$j]} ]]; then
+                checkValue=1
                     let c=$j+3
                     sed -n "$c"p $name
                     read -p "Do you want to update this row ? Y/N  : " answer
@@ -59,16 +63,27 @@ if [[ -f $name ]]; then
                         fi
                     elif [[ $answer == 'n' || $answer == 'N' ]]; then
                         echo " As you like :) "
+                        tables.sh
                     else
                         echo "you enterd wrong input it must be Y/y or N/n Only"
                         ((j--))
                     fi
                 fi
             done
+      if [[ $checkValue == 0 ]]; then
+      echo "Value Not Founded"
+      tables.sh
+      fi
         fi
+        
     done
+     if [[ $checkField == 0 ]]; then
+      echo "Field Not Founded"
+      tables.sh
+      fi
 else
     echo "table not found"
+    tables.sh
 fi
 # update from tableName
 # set id = dgfsk

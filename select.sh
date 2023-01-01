@@ -1,11 +1,13 @@
-select choice in selectAllfromTable SelectRowsByValue SelectAllRowsByCol; do
+select choice in selectAllfromTable SelectRowsByValue SelectAllRowsByCol returnTOtablesChoise; do
     case $choice in
     selectAllfromTable )
         read -p "Please enter table name: " name
         if [ -f $name ]; then
             sed '2d' $name
+            select.sh
         else
             echo "No Table Found"
+            select.sh
         fi
         ;;
     SelectRowsByValue )
@@ -28,15 +30,18 @@ select choice in selectAllfromTable SelectRowsByValue SelectAllRowsByCol; do
                             let c=$j+3
                             sed -n "$c p" $name
                             flag=1
+                            select.sh
                         fi
                     done
                 fi
             done
             if [[ $flag == 0 ]]; then
                 echo "there's no column found"
+                select.sh
             fi
         else
             echo "table not found"
+            select.sh
         fi
         ;;
     SelectAllRowsByCol )
@@ -53,19 +58,25 @@ select choice in selectAllfromTable SelectRowsByValue SelectAllRowsByCol; do
                 declare -i increment=$i+1
                 cut -d" " -f$increment $name | sed '2d'
                 flag=1
-                break
+                select.sh
             fi
         done
         if [[ $flag == 0 ]]; then
             echo "feild not found"
             echo ${feilds[@]}
+            select.sh
         fi
          else
             echo "table not found"
+            select.sh
         fi
         ;;
+    returnTOtablesChoise )
+        tables.sh
+    ;;
     *)
-        echo "select between 1 to 3"
+        echo "select between 1 to 4"
+        select.sh
         ;;
     esac
 done
