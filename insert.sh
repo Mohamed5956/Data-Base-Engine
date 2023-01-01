@@ -24,7 +24,7 @@ flag=0
             insertedData[$i]=$(zenity --entry \
             --width 500 \
             --title "Create Table" \
-            --text "Enter the ${feilds[$i]} :");
+            --text "Insert the ${feilds[$i]} :");
         if [[ ${arr_type[$i]} == "string" ]]; then
             if [[ ${insertedData[$i]} =~ $stringRegex ]]; then
                 continue

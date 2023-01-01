@@ -9,7 +9,7 @@ select choice in selectAllfromTable SelectRowsByValue SelectAllRowsByCol returnT
         if [ -f $name ]; then
             #sed '2d' $name
             zenity --text-info \
-            --title "Hostname Information" \
+            --title "Data Information" \
             --filename "$name"
             select.sh
         else
