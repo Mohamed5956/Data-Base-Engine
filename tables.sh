@@ -1,6 +1,8 @@
 while true; do
     choice=$(zenity --list \
         --column "select option" \
+        --width 600 \
+        --height 300 \
         CreateTable \
         ListTable \
         dropTable \
