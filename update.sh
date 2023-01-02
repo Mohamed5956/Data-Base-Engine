@@ -2,7 +2,7 @@ intRegex='^[0-9]+$'
 stringRegex='^[a-zA-Z]+$'
 checkField=0
 checkValue=0
-cd ~/DataBase/Company
+
 name=$(zenity --entry \
     --width 500 \
     --title "Create Table" \
@@ -108,11 +108,11 @@ if [[ -f $name ]]; then
                     --title "Error Message" \
                     --width 500 \
                     --height 100 \
-                    --text "Value Not Founded"
+                    --text "Value Not Found !!"
             fi
         fi
     done
-    if [[ $checkField == 1 && $checkValue == 1 ]]; then
+    if [[ $checkField == 1 && $checkValue == 1 && $newValue ]]; then
         #echo "Data_Updated"
         zenity --info \
             --title "Update Table" \
@@ -126,7 +126,7 @@ if [[ -f $name ]]; then
             --title "Error Message" \
             --width 500 \
             --height 100 \
-            --text "Field Not Founded"
+            --text "Column Not Found !!"
     fi
 else
     #echo "table not found"
@@ -134,5 +134,5 @@ else
         --title "Error Message" \
         --width 500 \
         --height 100 \
-        --text "Table Not Founded."
+        --text "Table Not Found !!"
 fi

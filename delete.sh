@@ -3,8 +3,10 @@ export LC_COLLATE=C
 while true; do
     choice=$(zenity --list \
         --column "select option" \
+        --width 600 \
+        --height 300 \
         TruncateTable \
-        deleteSingleRecord \
+        DeleteRecords \
         back)
     # select choice in TruncateTable deleteSingleRecord returnTOtablesChoise; do
     case $choice in
@@ -31,7 +33,7 @@ while true; do
                 --text "Table Not Founded."
         fi
         ;;
-    deleteSingleRecord)
+    DeleteRecords)
         #read -p "Delete From  table : " name
         name=$(zenity --entry \
             --width 500 \
