@@ -2,7 +2,7 @@ intRegex='^[1-9]+$'
 stringRegex='^[a-zA-Z]+$'
 checkField=0
 checkValue=0
-
+echo "hello"
 name=$(zenity --entry \
     --width 500 \
     --title "Create Table" \
