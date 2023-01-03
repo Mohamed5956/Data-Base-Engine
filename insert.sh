@@ -10,7 +10,7 @@ stringRegex='^[a-zA-z]+$'
 #read -p "Enter table name : " name
 name=$(zenity --entry \
     --width 500 \
-    --title "Create Table" \
+    --title "Table Insert" \
     --text "Enter The Table Name")
 if [[ -f $name ]]; then
     arr_type=($(sed -n '2p' $name))
@@ -23,7 +23,7 @@ if [[ -f $name ]]; then
         # read -p "enter the ${feilds[$i]} : " insertedData[$i]
         insertedData[$i]=$(zenity --entry \
             --width 500 \
-            --title "Create Table" \
+            --title "Table Insert" \
             --text "Insert the ${feilds[$i]} :")
         if [[ ${arr_type[$i]} == "string" ]]; then
             if [[ ${insertedData[$i]} =~ $stringRegex ]]; then
@@ -51,7 +51,7 @@ if [[ -f $name ]]; then
                         #read -p "enter the ${feilds[$i]} : " insertedData[$i]
                         insertedData[$i]=$(zenity --entry \
                             --width 500 \
-                            --title "Create Table" \
+                            --title "Table Insert" \
                             --text "Enter the ${feilds[$i]} :")
                     fi
                 done

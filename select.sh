@@ -14,7 +14,7 @@ while true; do
         #read -p "Please enter table name: " name
         name=$(zenity --entry \
             --width 500 \
-            --title "Create Table" \
+            --title "Table Select" \
             --text "Enter The Table Name")
         if [ -f $name ]; then
             #sed '2d' $name
@@ -35,13 +35,13 @@ while true; do
         #read -p "Please enter table name : " name
         name=$(zenity --entry \
             --width 500 \
-            --title "Create Table" \
+            --title "Table Select" \
             --text "Enter The Table Name")
         if [[ -f $name ]]; then
             #read -p "select * from $name where column : " column
             column=$(zenity --entry \
                 --width 500 \
-                --title "check Table" \
+                --title "Table Select" \
                 --text "select * from $name where column : ")
             declare -i flag=0
             declare -a feilds
@@ -52,7 +52,7 @@ while true; do
                     #read -p "$column = " value
                     value=$(zenity --entry \
                         --width 500 \
-                        --title "check Table" \
+                        --title "Table Select" \
                         --text "$column =  ")
                     ((i++))
                     # echo "iteration : " $i;
@@ -92,7 +92,7 @@ while true; do
         #read -p "Please enter table name: " name
         name=$(zenity --entry \
             --width 500 \
-            --title "Create Table" \
+            --title "Table Select" \
             --text "Enter The Table Name")
         if [[ -f $name ]]; then
             declare -a feilds
@@ -102,7 +102,7 @@ while true; do
             feild=$(
                 zenity --entry \
                     --width 500 \
-                    --title "check Table" \
+                    --title "Table Select" \
                     --text "enter the feild you want to select :  
             avaliable columns are : $(echo ${feilds[@]})
             "

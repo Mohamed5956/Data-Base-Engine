@@ -31,7 +31,7 @@ while true; do
         #read -p "Enter Name of Table : " name
         name=$(zenity --entry \
             --width 500 \
-            --title "Create Table" \
+            --title "Drop Table" \
             --text "Enter The Table Name")
         if [ -e $name ]; then
             # read -p "Do you want to Drop Table ? Y/N  : " answer
@@ -62,7 +62,7 @@ while true; do
             else
                 #echo " As you like :) "
                 zenity --info \
-                    --title "Database Confirm" \
+                    --title "Table Confirm" \
                     --width 500 \
                     --height 100 \
                     --text "As you like :)"

@@ -2,10 +2,9 @@ intRegex='^[1-9]+$'
 stringRegex='^[a-zA-Z]+$'
 checkField=0
 checkValue=0
-echo "hello"
 name=$(zenity --entry \
     --width 500 \
-    --title "Create Table" \
+    --title "Table Update" \
     --text "Enter The Table Name")
 if [[ -f $name ]]; then
     feilds=($(sed -n '1p' $name))
@@ -15,7 +14,7 @@ if [[ -f $name ]]; then
     #read -p "set : " column
     column=$(zenity --entry \
         --width 500 \
-        --title "check Table" \
+        --title "Table Update" \
         --text "set :  ")
     for ((i = 0; i < $len; i++)); do
         if [[ $column == ${feilds[$i]} ]]; then
@@ -24,7 +23,7 @@ if [[ -f $name ]]; then
             #read -p "$column = " value
             value=$(zenity --entry \
                 --width 500 \
-                --title "check Table" \
+                --title "Table Update" \
                 --text "$column =  ")
             ((i++))
             valuesOfColumn=($(sed '1,2d' $name | cut -d' ' -f$i))
@@ -46,7 +45,7 @@ if [[ -f $name ]]; then
                         #read -p "enter new value : " newValue
                         newValue=$(zenity --entry \
                             --width 500 \
-                            --title "check Table" \
+                            --title "Table Updtae" \
                             --text "enter new value : ")
                         # to check if data type is string or int
                         if [[ ${columnType[$columnNumber]} == 'string' ]]; then

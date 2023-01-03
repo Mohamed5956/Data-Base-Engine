@@ -14,7 +14,7 @@ while (($flag == 0)); do
 		--title "Create Table" \
 		--text "Enter The Table Name")
 
-	if [[ $name == *['!''?'','@\#\$%^\&*()-+\.\/';']* ]]; then
+	if [[ $name == *['!''?'',''`''~'@\#\$%^\&*()-+\.\/';']* ]]; then
 		#echo "! @ # $ % ^ () ? + ; . -  are not allowed!"
 		zenity --error \
 			--title "Error Message" \
@@ -99,7 +99,7 @@ while (($flag == 0)); do
 					flag=1
 					break
 				fi
-				if [[ ${colNames[$i]} == *['!''?'','@\#\$%^\&*()-+\.\/';']* ]]; then
+				if [[ ${colNames[$i]} == *['!''?'',''`''~'@\#\$%^\&*()-+\.\/';']* ]]; then
 					#echo "! @ # $ % ^ () ? + ; . -  are not allowed!"
 					zenity --error \
 						--title "Error Message" \

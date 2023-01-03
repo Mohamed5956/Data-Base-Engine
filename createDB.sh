@@ -10,7 +10,7 @@ while [ $flag -eq 0 ]; do
         --width 500 \
         --title "check Data Base" \
         --text "Enter your Data Base ")
-    if [[ $name == *['!''?'','@\#\$%^\&*()-+\.\/';']* ]]; then
+    if [[ $name == *['!''?'',''`''~'@\#\$%^\&*()-+\.\/';']* ]]; then
         #echo "! @ # $ % ^ () ? + ; . -  are not allowed!"
         zenity --error \
             --title "Error Message" \

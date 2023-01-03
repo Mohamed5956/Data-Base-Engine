@@ -14,13 +14,13 @@ while true; do
         #read -p "Enter Table you want to truncate : " name
         name=$(zenity --entry \
             --width 500 \
-            --title "Create Table" \
+            --title "Table Delete" \
             --text "Enter Table you want to truncate : ")
         if [[ -e $name ]]; then
             sed -i '3,$d' $name #deleting from line 3 to the end of the file
             #echo "All Data Deleted :) "
             zenity --info \
-                --title "Database Confirm" \
+                --title "Table Confirm" \
                 --width 500 \
                 --height 100 \
                 --text "All Data Deleted :)"
@@ -37,14 +37,14 @@ while true; do
         #read -p "Delete From  table : " name
         name=$(zenity --entry \
             --width 500 \
-            --title "Create Table" \
+            --title "Table Delete" \
             --text "Delete From  table : ")
         flag=0
         if [[ -e $name ]]; then
             #read -p "where column : " column
             column=$(zenity --entry \
                 --width 500 \
-                --title "check Table" \
+                --title "Table Delete" \
                 --text "where column : ")
             feilds=($(sed -n '1p' $name)) # getting columns in the file to array
             len=${#feilds[@]} 
@@ -55,7 +55,7 @@ while true; do
                     #read -p "$column = " value
                     value=$(zenity --entry \
                         --width 500 \
-                        --title "check Table" \
+                        --title "Table Delete" \
                         --text "$column =  ")
                     ((i++))
                     # echo "iteration : " $i;
@@ -91,7 +91,7 @@ while true; do
             if [[ $f == 1 ]]; then
                 #echo 'Data Deleted Successfully'
                 zenity --info \
-                    --title "Database Confirm" \
+                    --title "Table Confirm" \
                     --width 500 \
                     --height 100 \
                     --text "Data Deleted Successfully"
