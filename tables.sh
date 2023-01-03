@@ -22,7 +22,7 @@ while true; do
         echo "Table List : "
         # ls -F | grep -v "/"
         zenity --info \
-            --title "Info Message" \
+            --title "Tables List" \
             --width 500 \
             --height 100 \
             --text " $(ls -F | grep -v "/")"

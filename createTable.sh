@@ -5,7 +5,7 @@ export LC_COLLATE=C
 declare -a colNames
 declare -a dataType
 regex="^[0-9]+" # regex for start with number
-colNumberRegex='^[1-9]+$' # regex for number of column (start and end with number)
+colNumberRegex='^[0-9]+$' # regex for number of column (start and end with number)
 flag=0 # flag to validate name
 while (($flag == 0)); do
 	#read -p "Please enter the table name: " name
@@ -14,7 +14,7 @@ while (($flag == 0)); do
 		--title "Create Table" \
 		--text "Enter The Table Name")
 
-	if [[ $name == *['!''?'@\#\$%^\&*()-+\.\/';']* ]]; then
+	if [[ $name == *['!''?'','@\#\$%^\&*()-+\.\/';']* ]]; then
 		#echo "! @ # $ % ^ () ? + ; . -  are not allowed!"
 		zenity --error \
 			--title "Error Message" \
@@ -67,9 +67,9 @@ while (($flag == 0)); do
 		#read -p "enter number of columns : " colNumber
 		colNumber=$(zenity --entry \
 			--width 500 \
-			--title "check Table" \
+			--title "Create Table" \
 			--text "Enter Number Of Columns")
-		if ! [[ $colNumber =~ $colNumberRegex ]]; then
+		if ! [[ $colNumber =~ $colNumberRegex && $colNumber != "0" ]]; then
 			#echo "must be integer"
 			zenity --error \
 				--title "Error Message" \
@@ -84,7 +84,7 @@ while (($flag == 0)); do
 				#read -p "enter your feild : " colNames[$i]
 				colNames[$i]=$(zenity --entry \
 					--width 500 \
-					--title "check Table" \
+					--title "Create Table" \
 					--text "Enter your column")
 				# echo ${colNames[$i]}
 				# validation for regex
@@ -99,13 +99,13 @@ while (($flag == 0)); do
 					flag=1
 					break
 				fi
-				if [[ ${colNames[$i]} == *['!''?'@\#\$%^\&*()-+\.\/';']* ]]; then
+				if [[ ${colNames[$i]} == *['!''?'','@\#\$%^\&*()-+\.\/';']* ]]; then
 					#echo "! @ # $ % ^ () ? + ; . -  are not allowed!"
 					zenity --error \
 						--title "Error Message" \
 						--width 500 \
 						--height 100 \
-						--text "name can't contain ! @ # $ % ^ () ? + ; . - !"
+						--text "name can't contain ! @ # $ % ^ () ? + ; . - , !"
 					rm $name
 					flag=1
 					break
@@ -114,7 +114,7 @@ while (($flag == 0)); do
 				# getting datatype from user in array and validate it int or string only
 				dataType[$i]=$(zenity --entry \
 					--width 500 \
-					--title "check Table" \
+					--title "Create Table" \
 					--text "Enter data type : Must be int or string only")
 				if [[ ${dataType[$i]} == "int" ]]; then
 					continue

@@ -30,7 +30,7 @@ while true; do
         echo "ListDB"
         # ls -F | grep "/"
         zenity --info \
-            --title "Info Message" \
+            --title "Database List" \
             --width 500 \
             --height 100 \
             --text " $(ls -F | grep "/")"
