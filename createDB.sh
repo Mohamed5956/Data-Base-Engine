@@ -26,7 +26,7 @@ while [ $flag -eq 0 ]; do
             --title "Error Message" \
             --width 500 \
             --height 100 \
-            --text "name can't start with number!"
+            --text "Name can't start with number!"
         continue
     fi
 
@@ -36,7 +36,7 @@ while [ $flag -eq 0 ]; do
             --title "Error Message" \
             --width 500 \
             --height 100 \
-            --text "spaces are not allowed!"
+            --text "Spaces are not allowed!"
         continue
     fi
 
@@ -46,7 +46,7 @@ while [ $flag -eq 0 ]; do
             --title "Error Message" \
             --width 500 \
             --height 100 \
-            --text "name can't be empty!"
+            --text "Name can't be empty!"
         continue
     fi
     if [ -d $name ]; then

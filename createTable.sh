@@ -4,11 +4,9 @@ export LC_COLLATE=C
 # typeset -i colNumber
 declare -a colNames
 declare -a dataType
-
-regex="^[0-9]+"
-colNumberRegex='^[0-9]+$'
-
-flag=0
+regex="^[0-9]+" # regex for start with number
+colNumberRegex='^[1-9]+$' # regex for number of column (start and end with number)
+flag=0 # flag to validate name
 while (($flag == 0)); do
 	#read -p "Please enter the table name: " name
 	name=$(zenity --entry \
@@ -77,7 +75,7 @@ while (($flag == 0)); do
 				--title "Error Message" \
 				--width 500 \
 				--height 100 \
-				--text "must be integer!"
+				--text "number of columns must be integer And can't be 0 !"
 			flag=1
 			rm $name
 			break
@@ -87,18 +85,17 @@ while (($flag == 0)); do
 				colNames[$i]=$(zenity --entry \
 					--width 500 \
 					--title "check Table" \
-					--text "Enter your field")
-				echo ${colNames[$i]}
+					--text "Enter your column")
+				# echo ${colNames[$i]}
 				# validation for regex
-				numberRegex='^[0-9][a-zA-Z]+'
-				if [[ ${colNames[$i]} =~ $numberRegex ]]; then
+				if [[ ${colNames[$i]} =~ $regex ]]; then
 					#echo "Name Can't Start with Number !!"
 					zenity --error \
 						--title "Error Message" \
 						--width 500 \
 						--height 100 \
 						--text "Name Can't Start with Number !!"
-					rm $name
+					rm $name				# numberRegex='^[0-9][a-zA-Z]+'
 					flag=1
 					break
 				fi
@@ -114,6 +111,7 @@ while (($flag == 0)); do
 					break
 				fi
 				#read -p "enter data type : " dataType[$i]
+				# getting datatype from user in array and validate it int or string only
 				dataType[$i]=$(zenity --entry \
 					--width 500 \
 					--title "check Table" \
@@ -135,7 +133,8 @@ while (($flag == 0)); do
 				fi
 				# end of validation for data
 			done
-
+			# if everything is ok with the column names and data types 
+			# save it in the file created
 			if (($flag == 0)); then
 				echo ${colNames[@]} >>$name
 				echo ${dataType[@]} >>$name

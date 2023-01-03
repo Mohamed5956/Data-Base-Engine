@@ -10,7 +10,6 @@ else
     cd ~/DataBase
     echo "I ' m in DataBase"
 fi
-# export regex='+([a-zA-Z0-9_])'
 while true; do
     choice=$(zenity --list \
         --column "select option" \

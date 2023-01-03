@@ -1,4 +1,4 @@
-intRegex='^[0-9]+$'
+intRegex='^[1-9]+$'
 stringRegex='^[a-zA-Z]+$'
 checkField=0
 checkValue=0
@@ -71,7 +71,7 @@ if [[ -f $name ]]; then
                                     --title "Error Message" \
                                     --width 500 \
                                     --height 100 \
-                                    --text "column type int expected value int"
+                                    --text "column type int expected value int and can't be 0"
                                 ((j--))
                             fi
                         fi

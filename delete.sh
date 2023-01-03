@@ -17,7 +17,7 @@ while true; do
             --title "Create Table" \
             --text "Enter Table you want to truncate : ")
         if [[ -e $name ]]; then
-            sed -i '3,$d' $name
+            sed -i '3,$d' $name #deleting from line 3 to the end of the file
             #echo "All Data Deleted :) "
             zenity --info \
                 --title "Database Confirm" \
@@ -46,9 +46,9 @@ while true; do
                 --width 500 \
                 --title "check Table" \
                 --text "where column : ")
-            feilds=($(sed -n '1p' $name))
-            len=${#feilds[@]}
-            findCounter=0
+            feilds=($(sed -n '1p' $name)) # getting columns in the file to array
+            len=${#feilds[@]} 
+            findCounter=0 # counter to count data finded
             declare -i counter=0
             for ((i = 0; i < $len; i++)); do
                 if [[ $column == ${feilds[$i]} ]]; then
@@ -59,10 +59,12 @@ while true; do
                         --text "$column =  ")
                     ((i++))
                     # echo "iteration : " $i;
+                    # adding i++ because there's no feild of 0 start from 1
                     valuesOfColumn=($(sed '1,2d' $name | cut -d' ' -f$i))
                     # echo ${valuesOfColumn[@]}
                     for ((j = 0; j <= ${#valuesOfColumn[@]}; j++)); do
                         if [[ $value == ${valuesOfColumn[$j]} ]]; then
+                            # c because we need to find start of line 3
                             let c=$j+3
                             findedValues[$findCounter]=$c
                             let findCounter=$findCounter+1

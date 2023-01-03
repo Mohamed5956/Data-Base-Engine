@@ -18,14 +18,10 @@ while true; do
             --text "Enter The Table Name")
         if [ -f $name ]; then
             #sed '2d' $name
-            # zenity --text-info \
-            #     --title "Data Information" \
-            #     --filename "$name"
-            zenity --info \
-                --title "Info Message" \
-                --width 500 \
-                --height 100 \
-                --text " $(sed '2d' $name)"
+            zenity --list \
+                --width 600 \
+                --height 300 \
+                --column "$(sed -n -e '1p' -e '3,$p' $name)"
         else
             #echo "No Table Found"
             zenity --error \
@@ -66,12 +62,10 @@ while true; do
                         if [[ $value == ${valuesOfColumn[$j]} ]]; then
                             let c=$j+3
                             # sed -n "$c p" $name
-                            zenity --info \
-                                --title "Info Message" \
-                                --width 500 \
-                                --height 100 \
-                                --text " $(sed -n '1p' $name)
-    $(sed -n "$c p" $name) "
+                            zenity --list \
+                                --width 600 \
+                                --height 300 \
+                                --column "$(sed -n -e '1p' -e "$c p" $name)"
                             flag=1
                         fi
                     done
@@ -118,11 +112,10 @@ while true; do
                 if [[ $feild == ${feilds[$i]} ]]; then
                     declare -i increment=$i+1
                     # cut -d" " -f$increment $name | sed '2d'
-                    zenity --info \
-                        --title "Info Message" \
-                        --width 500 \
-                        --height 100 \
-                        --text " $(cut -d" " -f$increment $name | sed '2d') "
+                    zenity --list \
+                        --width 600 \
+                        --height 300 \
+                        --column "$(cut -d" " -f$increment $name | sed '2d')"
                     flag=1
                 fi
             done
