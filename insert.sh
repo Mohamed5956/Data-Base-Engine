@@ -36,9 +36,9 @@ if [[ -f $name ]]; then
                     --height 100 \
                     --text "wrong value for type string"
                 flag=1
-            fi
+            fi   
         else
-            if [[ ${insertedData[$i]} =~ $intRegex ]]; then
+            if [[ ${insertedData[$i]} =~ $intRegex && ${insertedData[$i]} -ne 0 ]]; then
                 for ((j = 0; j < ${#IDArray[@]}; j++)); do
                     if [[ ${insertedData[$i]} == ${IDArray[$j]} ]]; then
                         #echo "ID must be unique"
@@ -64,6 +64,7 @@ if [[ -f $name ]]; then
                     --height 100 \
                     --text "wrong value for type int."
                 flag=1
+                break
             fi
         fi
     done

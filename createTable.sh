@@ -69,7 +69,7 @@ while (($flag == 0)); do
 			--width 500 \
 			--title "Create Table" \
 			--text "Enter Number Of Columns")
-		if ! [[ $colNumber =~ $colNumberRegex && $colNumber != "0" ]]; then
+		if ! [[ $colNumber =~ $colNumberRegex && $colNumber -ne 0 ]]; then
 			#echo "must be integer"
 			zenity --error \
 				--title "Error Message" \
